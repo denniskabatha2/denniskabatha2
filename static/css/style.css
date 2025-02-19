@@ -1,0 +1,94 @@
+/* General Styles */
+:root {
+    --primary-color: #6c63ff;
+    --secondary-color: #2a2a2a;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: var(--bs-dark);
+}
+
+/* Canvas */
+#three-canvas {
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+/* Loading Screen */
+#loading-screen {
+    z-index: 9999;
+    background: var(--bs-dark);
+}
+
+/* Text Gradient */
+.text-gradient {
+    background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Hero Section */
+.hero-image {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Project Cards */
+.project-card {
+    transition: transform 0.3s ease;
+    background: var(--secondary-color);
+    border: none;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+}
+
+.project-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Skills */
+.skill-item {
+    margin-bottom: 1.5rem;
+}
+
+.progress {
+    height: 8px;
+    background: var(--secondary-color);
+}
+
+.progress-bar {
+    background: var(--primary-color);
+    transition: width 1.5s ease;
+}
+
+/* Contact Form */
+.form-control {
+    background: var(--secondary-color);
+    border: none;
+    padding: 0.8rem;
+}
+
+.form-control:focus {
+    background: var(--secondary-color);
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-image {
+        margin-top: 2rem;
+    }
+}
