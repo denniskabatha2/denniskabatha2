@@ -1,54 +1,91 @@
 <section id="projects" class="py-5">
     <div class="container">
         <h2 class="text-center mb-5">Featured Projects</h2>
-        <div class="row g-4">
+
+        <!-- Project Filters -->
+        <div class="project-filters text-center mb-4">
+            <button class="btn filter-btn active" data-filter="all">All</button>
+            <button class="btn filter-btn" data-filter="web">Web</button>
+            <button class="btn filter-btn" data-filter="3d">3D</button>
+            <button class="btn filter-btn" data-filter="mobile">Mobile</button>
+        </div>
+
+        <div class="row g-4" id="projects-grid">
             <!-- Project 1 -->
             <div class="col-md-6 col-lg-3">
-                <div class="project-card card h-100">
-                    <img src="https://images.unsplash.com/photo-1508873535684-277a3cbcc4e8" 
+                <div class="project-card card h-100" data-category="3d">
+                    <img src="https://images.unsplash.com/photo-1508873535684-277a3cbcc4e8"
                          class="card-img-top" alt="Project 1">
                     <div class="card-body">
                         <h5 class="card-title">3D Visualization</h5>
                         <p class="card-text">Interactive 3D product configurator</p>
+                        <div class="technologies mt-2">
+                            <!-- Technologies will be added here -->
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Project 2 -->
             <div class="col-md-6 col-lg-3">
-                <div class="project-card card h-100">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" 
+                <div class="project-card card h-100" data-category="web">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40"
                          class="card-img-top" alt="Project 2">
                     <div class="card-body">
                         <h5 class="card-title">E-commerce Platform</h5>
                         <p class="card-text">Modern shopping experience</p>
+                        <div class="technologies mt-2">
+                            <!-- Technologies will be added here -->
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Project 3 -->
             <div class="col-md-6 col-lg-3">
-                <div class="project-card card h-100">
-                    <img src="https://images.unsplash.com/photo-1739514984003-330f7c1d2007" 
+                <div class="project-card card h-100" data-category="web">
+                    <img src="https://images.unsplash.com/photo-1739514984003-330f7c1d2007"
                          class="card-img-top" alt="Project 3">
                     <div class="card-body">
                         <h5 class="card-title">Portfolio Website</h5>
                         <p class="card-text">Creative developer showcase</p>
+                        <div class="technologies mt-2">
+                            <!-- Technologies will be added here -->
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Project 4 -->
             <div class="col-md-6 col-lg-3">
-                <div class="project-card card h-100">
-                    <img src="https://images.unsplash.com/photo-1510759395231-72b17d622279" 
+                <div class="project-card card h-100" data-category="mobile">
+                    <img src="https://images.unsplash.com/photo-1510759395231-72b17d622279"
                          class="card-img-top" alt="Project 4">
                     <div class="card-body">
                         <h5 class="card-title">Mobile App</h5>
                         <p class="card-text">Cross-platform application</p>
+                        <div class="technologies mt-2">
+                            <!-- Technologies will be added here -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Project Card Template -->
+<template id="project-card-template">
+    <div class="col-md-6 col-lg-3">
+        <div class="project-card card h-100" data-category="">
+            <img src="" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text"></p>
+                <div class="technologies mt-2">
+                    <!-- Technologies will be added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
