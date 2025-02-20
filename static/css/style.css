@@ -173,3 +173,158 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--gradient-end);
 }
+
+/* Add these new styles to the existing CSS file */
+
+/* Theme Toggle */
+#theme-toggle {
+    width: 48px;
+    height: 48px;
+    transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+    transform: rotate(180deg);
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--primary-color);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    width: 50%;
+    padding-right: 2rem;
+}
+
+.timeline-item:nth-child(even) {
+    margin-left: 50%;
+    padding-right: 0;
+    padding-left: 2rem;
+}
+
+.timeline-dot {
+    position: absolute;
+    right: -10px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: 4px solid var(--bs-dark);
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+    right: auto;
+    left: -10px;
+}
+
+.timeline-content {
+    background: var(--secondary-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    position: relative;
+}
+
+.timeline-date {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Blog Cards */
+.blog-card {
+    transition: all 0.4s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blog-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Certificate Cards */
+.certificate-card {
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.certificate-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.certificate-icon {
+    transition: transform 0.4s ease;
+}
+
+.certificate-card:hover .certificate-icon {
+    transform: scale(1.2);
+}
+
+/* Project Filters */
+.project-filters {
+    margin-bottom: 2rem;
+}
+
+.filter-btn {
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Language Switcher */
+.language-switcher .dropdown-item {
+    cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 0;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 2rem;
+        padding-right: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+        margin-left: 0;
+        padding-left: 2rem;
+    }
+
+    .timeline-dot {
+        left: -10px;
+        right: auto;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+        left: -10px;
+    }
+}
