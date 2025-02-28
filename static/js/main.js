@@ -1,4 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Theme Toggle setup and persistence
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+    const html = document.documentElement;
+
+    // Get saved theme from localStorage or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-bs-theme', savedTheme);
+    themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-bs-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-bs-theme', newTheme);
+        themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('theme', newTheme);
+    });
+
+    // Language Switcher setup and persistence
+    const languageButtons = document.querySelectorAll('[data-lang]');
+    let currentLang = localStorage.getItem('language') || 'en';
+
+    // Update language dropdown button text
+    const updateLanguageButton = (lang) => {
+        const languageMap = { en: 'English', es: 'Español', fr: 'Français' };
+        const dropdownButton = document.querySelector('#languageDropdown');
+        dropdownButton.innerHTML = `<i class="fas fa-globe"></i> ${languageMap[lang]}`;
+    };
+
+    // Initialize with saved language
+    updateLanguageButton(currentLang);
+    updateContent(translations[currentLang]);
+
+    languageButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            if (lang === currentLang) return;
+
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            updateLanguageButton(lang);
+            updateContent(translations[lang]);
+
+            // Show notification
+            showNotification(`Language changed to ${translations[lang].languageName}`, 'success');
+        });
+    });
+
     // Initialize Three.js scene
     const threeScene = new ThreeScene();
 
@@ -135,137 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = themeToggle.querySelector('i');
-    const html = document.documentElement;
-
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-bs-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-bs-theme', newTheme);
-        themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-    });
-
-    // Language Switcher
-    const languageButtons = document.querySelectorAll('[data-lang]');
-    let currentLang = 'en';
-
-    const translations = {
-        en: {
-            hero: {
-                title: 'Creative Developer & Designer',
-                subtitle: 'Transforming ideas into immersive digital experiences'
-            },
-            about: {
-                title: 'About Me',
-                background: 'Background',
-                skills: 'Skills'
-            },
-            projects: {
-                title: 'Featured Projects',
-                filters: {
-                    all: 'All',
-                    web: 'Web',
-                    mobile: 'Mobile',
-                    '3d': '3D'
-                }
-            },
-            contact: {
-                title: 'Get in Touch',
-                name: 'Name',
-                email: 'Email',
-                message: 'Message',
-                send: 'Send Message'
-            }
-        },
-        es: {
-            hero: {
-                title: 'Desarrollador y Diseñador Creativo',
-                subtitle: 'Transformando ideas en experiencias digitales inmersivas'
-            },
-            about: {
-                title: 'Sobre Mí',
-                background: 'Experiencia',
-                skills: 'Habilidades'
-            },
-            projects: {
-                title: 'Proyectos Destacados',
-                filters: {
-                    all: 'Todos',
-                    web: 'Web',
-                    mobile: 'Móvil',
-                    '3d': '3D'
-                }
-            },
-            contact: {
-                title: 'Contacto',
-                name: 'Nombre',
-                email: 'Correo',
-                message: 'Mensaje',
-                send: 'Enviar Mensaje'
-            }
-        },
-        fr: {
-            hero: {
-                title: 'Développeur et Designer Créatif',
-                subtitle: 'Transformer les idées en expériences numériques immersives'
-            },
-            about: {
-                title: 'À Propos',
-                background: 'Parcours',
-                skills: 'Compétences'
-            },
-            projects: {
-                title: 'Projets Phares',
-                filters: {
-                    all: 'Tous',
-                    web: 'Web',
-                    mobile: 'Mobile',
-                    '3d': '3D'
-                }
-            },
-            contact: {
-                title: 'Contact',
-                name: 'Nom',
-                email: 'Email',
-                message: 'Message',
-                send: 'Envoyer'
-            }
-        }
-    };
-
-    function updateContent(content) {
-        // Update all sections with translations
-        document.querySelector('#hero h1').textContent = content.hero.title;
-        document.querySelector('#hero p').textContent = content.hero.subtitle;
-
-        document.querySelector('#about h2').textContent = content.about.title;
-        document.querySelector('#about h3:first-of-type').textContent = content.about.background;
-        document.querySelector('#about h3:last-of-type').textContent = content.about.skills;
-
-        document.querySelector('#projects h2').textContent = content.projects.title;
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            const filter = btn.getAttribute('data-filter');
-            btn.textContent = content.projects.filters[filter];
-        });
-
-        document.querySelector('#contact h2').textContent = content.contact.title;
-        document.querySelector('label[for="name"]').textContent = content.contact.name;
-        document.querySelector('label[for="email"]').textContent = content.contact.email;
-        document.querySelector('label[for="message"]').textContent = content.contact.message;
-        document.querySelector('#contact-form button').textContent = content.contact.send;
-    }
-
-    languageButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const lang = btn.getAttribute('data-lang');
-            if (lang === currentLang) return;
-
-            currentLang = lang;
-            updateContent(translations[lang]);
-        });
-    });
 
     // Notification system
     function showNotification(message, type) {
@@ -277,9 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         gsap.fromTo(notification,
             { y: -50, opacity: 0 },
-            { 
-                y: 0, 
-                opacity: 1, 
+            {
+                y: 0,
+                opacity: 1,
                 duration: 0.5,
                 ease: 'power2.out',
                 onComplete: () => {
@@ -336,3 +253,113 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Translations object
+const translations = {
+    en: {
+        languageName: 'English',
+        hero: {
+            title: 'Creative Developer & Designer',
+            subtitle: 'Transforming ideas into immersive digital experiences'
+        },
+        about: {
+            title: 'About Me',
+            background: 'Background',
+            skills: 'Skills'
+        },
+        projects: {
+            title: 'Featured Projects',
+            filters: {
+                all: 'All',
+                web: 'Web',
+                mobile: 'Mobile',
+                '3d': '3D'
+            }
+        },
+        contact: {
+            title: 'Get in Touch',
+            name: 'Name',
+            email: 'Email',
+            message: 'Message',
+            send: 'Send Message'
+        }
+    },
+    es: {
+        languageName: 'Español',
+        hero: {
+            title: 'Desarrollador y Diseñador Creativo',
+            subtitle: 'Transformando ideas en experiencias digitales inmersivas'
+        },
+        about: {
+            title: 'Sobre Mí',
+            background: 'Experiencia',
+            skills: 'Habilidades'
+        },
+        projects: {
+            title: 'Proyectos Destacados',
+            filters: {
+                all: 'Todos',
+                web: 'Web',
+                mobile: 'Móvil',
+                '3d': '3D'
+            }
+        },
+        contact: {
+            title: 'Contacto',
+            name: 'Nombre',
+            email: 'Correo',
+            message: 'Mensaje',
+            send: 'Enviar Mensaje'
+        }
+    },
+    fr: {
+        languageName: 'Français',
+        hero: {
+            title: 'Développeur et Designer Créatif',
+            subtitle: 'Transformer les idées en expériences numériques immersives'
+        },
+        about: {
+            title: 'À Propos',
+            background: 'Parcours',
+            skills: 'Compétences'
+        },
+        projects: {
+            title: 'Projets Phares',
+            filters: {
+                all: 'Tous',
+                web: 'Web',
+                mobile: 'Mobile',
+                '3d': '3D'
+            }
+        },
+        contact: {
+            title: 'Contact',
+            name: 'Nom',
+            email: 'Email',
+            message: 'Message',
+            send: 'Envoyer'
+        }
+    }
+};
+
+function updateContent(content) {
+    // Update all sections with translations
+    document.querySelector('#hero h1').textContent = content.hero.title;
+    document.querySelector('#hero p').textContent = content.hero.subtitle;
+
+    document.querySelector('#about h2').textContent = content.about.title;
+    document.querySelector('#about h3:first-of-type').textContent = content.about.background;
+    document.querySelector('#about h3:last-of-type').textContent = content.about.skills;
+
+    document.querySelector('#projects h2').textContent = content.projects.title;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        const filter = btn.getAttribute('data-filter');
+        btn.textContent = content.projects.filters[filter];
+    });
+
+    document.querySelector('#contact h2').textContent = content.contact.title;
+    document.querySelector('label[for="name"]').textContent = content.contact.name;
+    document.querySelector('label[for="email"]').textContent = content.contact.email;
+    document.querySelector('label[for="message"]').textContent = content.contact.message;
+    document.querySelector('#contact-form button').textContent = content.contact.send;
+}
