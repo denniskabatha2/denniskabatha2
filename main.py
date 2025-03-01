@@ -39,6 +39,22 @@ def get_projects():
             "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
             "category": "web",
             "technologies": ["React", "Node.js", "MongoDB"]
+        },
+        {
+            "id": 3,
+            "title": "Mobile App",
+            "description": "Cross-platform fitness tracking application",
+            "image": "https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa",
+            "category": "mobile",
+            "technologies": ["React Native", "Firebase", "Redux"]
+        },
+        {
+            "id": 4,
+            "title": "Data Visualization Dashboard",
+            "description": "Interactive analytics platform",
+            "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+            "category": "web",
+            "technologies": ["D3.js", "Vue.js", "Python"]
         }
     ]
     category = request.args.get('category', 'all')

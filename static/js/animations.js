@@ -11,12 +11,27 @@ class Animations {
         // Hero Section Animation
         const heroTl = gsap.timeline();
 
-        heroTl.from('#hero h1', {
-            duration: 1.2,
-            y: 100,
-            opacity: 0,
-            ease: 'power4.out'
-        })
+        // Split text into characters for typing effect
+        const heroTitle = document.querySelector('#hero h1');
+        const text = heroTitle.textContent;
+        heroTitle.innerHTML = '';
+        heroTitle.style.opacity = 1;
+        
+        // Add each character with a span
+        text.split('').forEach(char => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.opacity = 0;
+            heroTitle.appendChild(span);
+        });
+        
+        // Animate characters one by one
+        gsap.to('#hero h1 span', {
+            duration: 0.05,
+            opacity: 1,
+            stagger: 0.05,
+            ease: 'none'
+        });
         .from('#hero p', {
             duration: 1,
             y: 50,
